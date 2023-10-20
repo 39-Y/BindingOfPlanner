@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2088bd69668fdc84eb64a90f91fb9b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
 --- !u!212 &3041007553288014552
 SpriteRenderer:
   m_ObjectHideFlags: 0

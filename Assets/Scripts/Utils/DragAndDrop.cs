@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Zenject;
 
-public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     private RectTransform rectTransform;
     private Image image;
+    [Inject]public Canvas canvas;
 
     private void Start()
     {
@@ -23,18 +25,10 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     
     public void OnDrag(PointerEventData eventData)
     {
+        //rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        Debug.Log("canvas:"+canvas);
         rectTransform.anchoredPosition += eventData.delta;
         //transform.position = Input.mousePosition;
-        
-        Ray ray = Camera.main.ScreenPointToRay(rectTransform.position);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            // 충돌한 오브젝트 처리
-            GameObject hitObject = hit.collider.gameObject;
-            Debug.Log("충돌한 오브젝트 이름: " + hitObject.name);
-        }
     }
 
     
@@ -43,5 +37,10 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     {
         image.color = new Color32(168, 197, 236, 255);
 
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        
     }
 }
