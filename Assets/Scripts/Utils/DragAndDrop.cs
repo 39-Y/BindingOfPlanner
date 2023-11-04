@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -8,7 +9,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
     private Image image;
     [SerializeField]private Canvas canvas;
     private CanvasGroup canvasGroup;
-
+    private Vector2 defaultPose;
     private void Start()
     {
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -22,6 +23,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
         image.color = new Color32(168, 197, 236, 100);
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
+        defaultPose = transform.position;
     }
     
     public void OnDrag(PointerEventData eventData)
@@ -36,6 +38,10 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
         canvasGroup.alpha = 1f;
 
         canvasGroup.blocksRaycasts = true;
+        transform.position = defaultPose;
+        //누구와 충돌했는지 확인
+
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
