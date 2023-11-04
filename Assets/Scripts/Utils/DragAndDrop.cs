@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Zenject;
 
 public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -33,9 +29,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         //transform.position = Input.mousePosition;
     }
-    
-
-    
 
     public void OnEndDrag(PointerEventData eventData)
     {
