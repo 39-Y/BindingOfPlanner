@@ -6,7 +6,7 @@ namespace Action.VO
     {
         public ActionVO(){}
 
-        public ActionVO(int id, string title, string content, bool isCompleted, string createDate, string doDate)
+        public ActionVO(long id, string title, string content, bool isCompleted, string createDate, string doDate)
         {
             this.id = id;
             this.title = title;
@@ -15,7 +15,7 @@ namespace Action.VO
             this.createDate = Convert.ToDateTime(createDate);
             this.doDate = Convert.ToDateTime(doDate);
         }
-        public int id { get; }
+        public long id { get; }
         public string title { get; }
         public string content { get; }
         public bool isCompleted { get; }

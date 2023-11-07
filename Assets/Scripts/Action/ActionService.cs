@@ -31,6 +31,11 @@ namespace Action
             dbConnection.Close();
         }
 
+        public void updateDoDateById(long id)
+        {
+            
+        }
+
         public List<ActionVO> FindByPeriod(string startDate, string endDate)
         {
             List<ActionVO> actionVos = new List<ActionVO>();
@@ -47,7 +52,7 @@ namespace Action
             
             while (dataReader.Read())
             {
-                int id = dataReader.GetInt32(0);
+                long id = dataReader.GetInt32(0);
                 string title = dataReader.GetString(1);
                 string content = dataReader.GetString(2);
                 bool isCompleted = dataReader.GetBoolean(3);

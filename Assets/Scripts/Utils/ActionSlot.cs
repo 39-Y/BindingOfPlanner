@@ -6,10 +6,23 @@ public class ActionSlot : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+        Transform actionBlock = eventData.pointerDrag.transform;
+        
+        if (actionBlock != null)
         {
-            Debug.Log("On Drop"+transform.Find("date").GetComponent<TextMeshProUGUI>().text); 
-            eventData.pointerDrag.transform.SetParent(transform.Find("ActionBlocks"));
+            string currentDate = actionBlock.parent.parent.Find("date").GetComponent<TextMeshProUGUI>().text;
+            
+            string changedDate = transform.Find("date").GetComponent<TextMeshProUGUI>().text;
+            
+            Debug.Log("current:" + currentDate+"/changed:"+ changedDate+"/isSame?" + changedDate.Equals(currentDate));
+            
+            if (!changedDate.Equals(currentDate))
+            {
+                actionBlock.SetParent(transform.Find("ActionBlocks"));
+                
+                Debug.Log("update");
+
+            }
         }
     }
 }
