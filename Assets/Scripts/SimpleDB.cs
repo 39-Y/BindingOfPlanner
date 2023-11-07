@@ -47,4 +47,9 @@ public class SimpleDB : MonoBehaviour
         }
 
     }
+
+    public void UpdateDoDateById(long id, string doDate)
+    {
+        actionService.UpdateDoDateById(id, doDate);
+    }
 }

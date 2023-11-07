@@ -24,16 +24,23 @@ namespace Action
         {
             dbConnection.Open();
             IDbCommand dbCommand = dbConnection.CreateCommand();
-            dbCommand.CommandText = "INSERT INTO Action(title, content, is_completed, create_date) " +
+            dbCommand.CommandText = $"INSERT INTO {table} (title, content, is_completed, create_date) " +
                                     "VALUES ('추가 Action', 'content', 0, '2023-10-10')";
             dbCommand.ExecuteNonQuery();
             dbConnection.Dispose();
             dbConnection.Close();
         }
 
-        public void updateDoDateById(long id)
+        public void UpdateDoDateById(long id, string doDate)
         {
-            
+            dbConnection.Open();
+            IDbCommand dbCommand = dbConnection.CreateCommand();
+            string query = $"UPDATE {table} SET do_date = '{doDate}' WHERE id = {id}";
+            dbCommand.CommandText = query;
+            Debug.Log($"query:{query}");
+            dbCommand.ExecuteNonQuery();
+            dbConnection.Dispose();
+            dbConnection.Close();
         }
 
         public List<ActionVO> FindByPeriod(string startDate, string endDate)

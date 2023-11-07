@@ -1,9 +1,14 @@
+using System;
+using Action;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 public class ActionSlot : MonoBehaviour, IDropHandler
 {
+    [Inject] private ActionService actionService;
     public void OnDrop(PointerEventData eventData)
     {
         Transform actionBlock = eventData.pointerDrag.transform;
@@ -19,6 +24,10 @@ public class ActionSlot : MonoBehaviour, IDropHandler
             if (!changedDate.Equals(currentDate))
             {
                 actionBlock.SetParent(transform.Find("ActionBlocks"));
+
+                long id = Convert.ToInt64(actionBlock.Find("action_id").GetComponent<TextMeshProUGUI>().text);
+                
+                actionService.UpdateDoDateById(id, changedDate);
                 
                 Debug.Log("update");
 
