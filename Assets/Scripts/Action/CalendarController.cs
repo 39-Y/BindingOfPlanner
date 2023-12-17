@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Action.VO;
 using ModestTree;
@@ -132,6 +131,8 @@ namespace Action
         {
             Transform action= Instantiate(actionBlock, actionBlocks).transform;
             action.Find("action_text").GetComponent<TextMeshProUGUI>().text = actionVo.title;
+            action.Find("action_id").GetComponent<TextMeshProUGUI>().text = actionVo.id.ToString();
+                
         }
         
         

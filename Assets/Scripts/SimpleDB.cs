@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using Action;
 using Action.VO;
 using UnityEngine;
-using Mono.Data.Sqlite;
 using TMPro;
 using Zenject;
 
@@ -49,5 +46,10 @@ public class SimpleDB : MonoBehaviour
             footer.Find("createDate").GetComponent<TextMeshProUGUI >().text = actionVo.createDate.ToString("yyyy-MM-dd");
         }
 
+    }
+
+    public void UpdateDoDateById(long id, string doDate)
+    {
+        actionService.UpdateDoDateById(id, doDate);
     }
 }

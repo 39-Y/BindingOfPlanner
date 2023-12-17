@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,9 +7,13 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 {
     private RectTransform rectTransform;
     private Image image;
-
+    [SerializeField]private Canvas canvas;
+    private CanvasGroup canvasGroup;
+    private Vector2 defaultPose;
     private void Start()
     {
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        canvasGroup = GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();
     }
@@ -19,29 +21,27 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         image.color = new Color32(168, 197, 236, 100);
+        canvasGroup.alpha = 0.6f;
+        canvasGroup.blocksRaycasts = false;
+        defaultPose = transform.position;
     }
     
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta;
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         //transform.position = Input.mousePosition;
-        
-        Ray ray = Camera.main.ScreenPointToRay(rectTransform.position);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            // 충돌한 오브젝트 처리
-            GameObject hitObject = hit.collider.gameObject;
-            Debug.Log("충돌한 오브젝트 이름: " + hitObject.name);
-        }
     }
-
-    
 
     public void OnEndDrag(PointerEventData eventData)
     {
         image.color = new Color32(168, 197, 236, 255);
+        canvasGroup.alpha = 1f;
+
+        canvasGroup.blocksRaycasts = true;
+        transform.position = defaultPose;
+        //누구와 충돌했는지 확인
+
 
     }
+    
 }
